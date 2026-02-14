@@ -1,2 +1,2 @@
-# Ekalith-site
+# Ekalith.com
 Ekalith
