@@ -1,98 +1,64 @@
 <style>
-  :root{
-    --bg:#070a0f;
-    --t:#f5f7fb;
-    --s:rgba(245,247,251,.82);
-    --line:rgba(245,247,251,.30);
-  }
+body {
+  margin: 0;
+}
 
-  .ek-hero{
-    position:relative;
-    min-height:85vh;
-    width:100%;
-    overflow:hidden;
-    background:var(--bg);
-    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  }
+.hero {
+  position: relative;
+  height: 100vh;
+  background-image: url("/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
 
-  .ek-hero__bg{
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.85) 100%),
-      url("/hero.jpg");
-    background-size:cover;
-    background-position:center;
-    transform:scale(1.05);
-    animation:zoom 14s ease-in-out forwards;
-    filter:saturate(1.06) contrast(1.05);
-  }
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
 
-  .ek-hero__content{
-    position:relative;
-    z-index:2;
-    max-width:1200px;
-    margin:0 auto;
-    padding:clamp(40px,6vw,100px);
-    min-height:85vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-  }
+.content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding-left: 8%;
+  max-width: 800px;
+  font-family: Arial, sans-serif;
+}
 
-  .ek-badge{
-    color:var(--s);
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    font-size:13px;
-    margin-bottom:25px;
-  }
+.badge {
+  letter-spacing: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
 
-  .ek-title{
-    color:var(--t);
-    font-weight:900;
-    font-size:clamp(52px,7vw,110px);
-    line-height:1.05;
-    margin:0 0 25px;
-    border-bottom:2px solid var(--line);
-    display:inline-block;
-    padding-bottom:18px;
-    animation:fadeUp 1s ease forwards;
-  }
+h1 {
+  font-size: 80px;
+  margin: 0;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  padding-bottom: 20px;
+}
 
-  .ek-subtitle{
-    color:var(--s);
-    font-size:clamp(20px,2.2vw,26px);
-    line-height:1.7;
-    max-width:720px;
-    animation:fadeUp 1.4s ease forwards;
-  }
-
-  @keyframes fadeUp{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-
-  @keyframes zoom{
-    to{transform:scale(1.12);}
-  }
-
-  @media (max-width:600px){
-    .ek-hero{min-height:75vh;}
-  }
+.subtitle {
+  margin-top: 25px;
+  font-size: 22px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
 </style>
 
-<section class="ek-hero">
-  <div class="ek-hero__bg"></div>
+<section class="hero">
+  <div class="overlay"></div>
 
-  <div class="ek-hero__content">
-    <div class="ek-badge">MINERAL KOMPOZİT</div>
-
-    <h1 class="ek-title">EKALITH</h1>
-
-    <p class="ek-subtitle">
+  <div class="content">
+    <div class="badge">MINERAL KOMPOZİT</div>
+    <h1>EKALITH</h1>
+    <div class="subtitle">
       Yeni nesil yapı kompoziti.<br>
       Dayanıklı, hafif, modern yüzey çözümleri.
-    </p>
+    </div>
   </div>
 </section>
