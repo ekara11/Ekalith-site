@@ -1,44 +1,55 @@
 <style>
   :root{
-    --ek-bg:#0b0f14;
-    --ek-text:#f5f7fb;
-    --ek-sub:rgba(245,247,251,.78);
-    --ek-line:rgba(245,247,251,.35);
-    --ek-btn-bg:rgba(245,247,251,.10);
-    --ek-btn-bd:rgba(245,247,251,.28);
-    --ek-btn-hv:rgba(245,247,251,.18);
+    --bg:#070a0f;
+    --t:#f5f7fb;
+    --s:rgba(245,247,251,.78);
+    --line:rgba(245,247,251,.30);
+    --glass:rgba(8,12,18,.22);
+    --bd:rgba(245,247,251,.14);
   }
 
   .ek-hero{
-    position: relative;
-    min-height: 78vh;
-    width: 100%;
-    overflow: hidden;
-    background: var(--ek-bg);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    position:relative;
+    min-height:78vh;
+    width:100%;
+    overflow:hidden;
+    background:var(--bg);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   }
 
+  /* Arka plan: görsel + derinlik + vignette + çok hafif grain */
   .ek-hero__bg{
     position:absolute; inset:0;
     background:
-      linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.65) 100%),
+      radial-gradient(1200px 700px at 25% 35%, rgba(120,180,255,.14) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(900px 520px at 70% 65%, rgba(255,255,255,.06) 0%, rgba(0,0,0,0) 62%),
+      linear-gradient(180deg, rgba(0,0,0,.70) 0%, rgba(0,0,0,.38) 45%, rgba(0,0,0,.78) 100%),
       url("YOUR_HERO_IMAGE.jpg");
-    background-size: cover;
-    background-position: center;
-    transform: scale(1.03);
-    animation: ekZoom 10s ease-in-out forwards;
-    will-change: transform;
+    background-size:cover;
+    background-position:center;
+    transform:scale(1.03);
+    animation:ekZoom 12s ease-in-out forwards;
+    will-change:transform;
+    filter:saturate(1.05) contrast(1.05);
+  }
+
+  .ek-hero__grain{
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+    opacity:.12;
+    pointer-events:none;
   }
 
   .ek-hero__content{
-    position: relative;
-    z-index: 2;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: clamp(28px, 4vw, 56px);
-    min-height: 78vh;
-    display: grid;
-    align-content: center;
+    position:relative;
+    z-index:2;
+    max-width:1180px;
+    margin:0 auto;
+    padding:clamp(28px,4vw,56px);
+    min-height:78vh;
+    display:grid;
+    align-content:center;
   }
 
   .ek-badge{
@@ -46,124 +57,77 @@
     align-items:center;
     gap:10px;
     padding:10px 14px;
-    border: 1px solid rgba(245,247,251,.16);
-    background: rgba(11,15,20,.28);
-    backdrop-filter: blur(6px);
-    border-radius: 999px;
-    width: fit-content;
-    color: var(--ek-sub);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    font-size: 12px;
+    border:1px solid var(--bd);
+    background:var(--glass);
+    backdrop-filter:blur(8px);
+    border-radius:999px;
+    width:fit-content;
+    color:var(--s);
+    letter-spacing:.10em;
+    text-transform:uppercase;
+    font-size:12px;
   }
 
   .ek-title{
-    margin: 18px 0 6px;
-    color: var(--ek-text);
-    font-weight: 800;
-    font-size: clamp(40px, 5.5vw, 78px);
-    line-height: 1.02;
-    letter-spacing: .02em;
-    opacity: 0;
-    transform: translateY(14px);
-    animation: ekFadeUp .9s ease forwards .1s;
+    margin:18px 0 8px;
+    color:var(--t);
+    font-weight:900;
+    font-size:clamp(42px,5.6vw,82px);
+    line-height:1.02;
+    letter-spacing:.02em;
+    opacity:0;
+    transform:translateY(14px);
+    animation:ekFadeUp .9s ease forwards .1s;
   }
 
-  .ek-title .ek-line{
+  .ek-title .ek-underline{
     display:inline-block;
-    border-bottom: 2px solid var(--ek-line);
-    padding-bottom: 8px;
+    border-bottom:2px solid var(--line);
+    padding-bottom:10px;
   }
 
   .ek-subtitle{
-    margin: 10px 0 0;
-    color: var(--ek-sub);
-    font-size: clamp(16px, 2vw, 22px);
-    line-height: 1.55;
-    max-width: 640px;
-    opacity: 0;
-    transform: translateY(14px);
-    animation: ekFadeUp .9s ease forwards .25s;
+    margin:10px 0 0;
+    color:var(--s);
+    font-size:clamp(16px,2vw,22px);
+    line-height:1.55;
+    max-width:680px;
+    opacity:0;
+    transform:translateY(14px);
+    animation:ekFadeUp .9s ease forwards .25s;
   }
-
-  .ek-actions{
-    margin-top: 26px;
-    display:flex;
-    gap:12px;
-    flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(14px);
-    animation: ekFadeUp .9s ease forwards .4s;
-  }
-
-  .ek-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding: 12px 16px;
-    border-radius: 14px;
-    border: 1px solid var(--ek-btn-bd);
-    background: var(--ek-btn-bg);
-    color: var(--ek-text);
-    text-decoration: none;
-    font-weight: 650;
-    transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    backdrop-filter: blur(6px);
-  }
-  .ek-btn:hover{ background: var(--ek-btn-hv); transform: translateY(-1px); }
-  .ek-btn:active{ transform: translateY(0); }
-
-  .ek-btn--solid{
-    background: rgba(245,247,251,.92);
-    color: #0b0f14;
-    border-color: rgba(245,247,251,.92);
-  }
-  .ek-btn--solid:hover{ background: rgba(245,247,251,1); }
 
   .ek-mini{
-    margin-top: 18px;
-    color: rgba(245,247,251,.68);
-    font-size: 13px;
-    letter-spacing: .02em;
-    opacity: 0;
-    transform: translateY(14px);
-    animation: ekFadeUp .9s ease forwards .55s;
+    margin-top:18px;
+    color:rgba(245,247,251,.65);
+    font-size:13px;
+    letter-spacing:.02em;
+    opacity:0;
+    transform:translateY(14px);
+    animation:ekFadeUp .9s ease forwards .45s;
   }
 
-  @keyframes ekFadeUp{
-    to{ opacity:1; transform: translateY(0); }
-  }
-  @keyframes ekZoom{
-    to{ transform: scale(1.09); }
-  }
+  @keyframes ekFadeUp{ to{opacity:1; transform:translateY(0);} }
+  @keyframes ekZoom{ to{transform:scale(1.10);} }
 
-  /* Mobilde okunabilirlik */
-  @media (max-width: 560px){
-    .ek-hero{ min-height: 70vh; }
-    .ek-hero__content{ min-height: 70vh; }
+  @media (max-width:560px){
+    .ek-hero, .ek-hero__content{ min-height:70vh; }
   }
 </style>
 
-<section class="ek-hero" aria-label="EKALITH Hero">
-  <div class="ek-hero__bg" role="img" aria-label="EKALITH modern yapı görseli"></div>
+<section class="ek-hero" aria-label="EKALITH">
+  <div class="ek-hero__bg" role="img" aria-label="EKALITH arka plan görseli"></div>
+  <div class="ek-hero__grain" aria-hidden="true"></div>
 
   <div class="ek-hero__content">
-    <div class="ek-badge">mineral kompozit</div>
+    <div class="ek-badge">MINERAL KOMPOZİT</div>
 
-    <h1 class="ek-title">
-      <span class="ek-line">EKALITH</span>
-    </h1>
+    <h1 class="ek-title"><span class="ek-underline">EKALITH</span></h1>
 
     <p class="ek-subtitle">
       Yeni nesil yapı kompoziti.<br/>
       Dayanıklı, hafif, modern yüzey çözümleri.
     </p>
-
-    <div class="ek-actions">
-      <a class="ek-btn ek-btn--solid" href="#urunler">Ürünleri Keşfet</a>
-      <a class="ek-btn" href="#iletisim">Teklif Al</a>
-    </div>
 
     <div class="ek-mini">Kurumsal katalog & teknik dokümanlar çok yakında.</div>
   </div>
